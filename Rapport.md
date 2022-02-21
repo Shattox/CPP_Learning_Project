@@ -114,3 +114,7 @@ d'une part d'insérer ou supprimer en tête ou queue de manière rapide et ces
 opérations n'invalident pas le déréférencement des autres éléments de la **deque**.
 De plus contrairement à un **std::vector** l'extension d'une **deque** est moins
 coûteuse que celle d'un **std::vector**.
+
+### C- Bidouillons !
+
+1. Les vitesses maximales et accélérations sont définis dans la classe **aircraft_types**.
