@@ -118,3 +118,9 @@ coûteuse que celle d'un **std::vector**.
 ### C- Bidouillons !
 
 1. Les vitesses maximales et accélérations sont définis dans la classe **aircraft_types**.
+
+
+2. Lorsque l'on essaye de mettre en pause le programme en manipulant le framerate,
+   il s'arrête car dans la fonction **timer** dans le fichier **opengl_interface** on divise
+   par la variable **ticks_per_sec** qui gère le framerate lorsque celle-ci vaut **0** on a donc
+   une division par **0**.
