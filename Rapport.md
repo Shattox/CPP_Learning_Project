@@ -124,3 +124,8 @@ coûteuse que celle d'un **std::vector**.
    il s'arrête car dans la fonction **timer** dans le fichier **opengl_interface** on divise
    par la variable **ticks_per_sec** qui gère le framerate lorsque celle-ci vaut **0** on a donc
    une division par **0**.
+
+3.
+  ```cpp
+  constexpr unsigned int SERVICE_CYCLES = 40u;
+  ```
