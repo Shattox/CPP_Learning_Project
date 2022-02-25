@@ -129,3 +129,11 @@ coûteuse que celle d'un **std::vector**.
   ```cpp
   constexpr unsigned int SERVICE_CYCLES = 40u;
   ```
+
+4. On pouvait penser à supprimer l'avion dans la fonction **move** de
+   la classe **Aircraft**. Il n'est pas sûr de procéder au retrait dans
+   cette fonction car la boucle dans la fonction **timer** ne le permet pas, il faut la changer en **itérateur**.
+   On supprime donc dans la fonction **timer** dans le fichier
+   **opengl_interface.cpp**. Pour transmettre l'information on modifie
+   le type de retour de la fonction **move** pour renvoyer un **bool**
+   pour savoir si on peut retirer l'avion.
