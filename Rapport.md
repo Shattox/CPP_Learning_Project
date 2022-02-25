@@ -137,3 +137,6 @@ coûteuse que celle d'un **std::vector**.
    **opengl_interface.cpp**. Pour transmettre l'information on modifie
    le type de retour de la fonction **move** pour renvoyer un **bool**
    pour savoir si on peut retirer l'avion.
+
+5. Il n'est pas pertinent de faire la même pour un **DynamicObject** car
+   il est implémenté seulement des des **set**.
