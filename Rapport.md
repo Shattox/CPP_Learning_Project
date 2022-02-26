@@ -20,7 +20,7 @@ Lorsque l'on lance 4 avions, comme il n'y a que
 3 terminaux alors seulement 3 avions atteri et vont dans chacun des 3 terminaux.
 L'autre avion continue de voler et atteri une fois qu'il y a une place de disponible.
 
-### B-Analyse du code
+### B- Analyse du code
 
 - **AircraftType ->**
   Représente les caractéristiques d'un avion.
@@ -141,3 +141,11 @@ coûteuse que celle d'un **std::vector**.
 5. Il n'est pas pertinent de faire la même pour un **DynamicObject** car
    dans notre programme les classes qui héritent de **DynamicObject** héritent
    aussi de **Displayable**.
+
+### D- Théorie
+
+1. Seule la classe **Tower** peut réserver un terminal à l'aéroport car
+   elle stocke l'état des terminaux en fonction de si il y a un avion ou non.
+
+2. On est pas passé par une référence car dans la fonction, on modifie la
+   variable passé en paramètre.
