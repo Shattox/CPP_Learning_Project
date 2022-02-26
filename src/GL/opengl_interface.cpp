@@ -77,8 +77,9 @@ void timer(const int step)
         for (auto it = move_queue.begin(); it != move_queue.end(); it++)
         {
             if (!(*it)->move()) {
-                delete (*it);
-                move_queue.erase(it);
+                auto aircraft = (*it);
+                it = move_queue.erase(it);
+                delete (aircraft);
             }
         }
         glutPostRedisplay();

@@ -139,4 +139,5 @@ coûteuse que celle d'un **std::vector**.
    pour savoir si on peut retirer l'avion.
 
 5. Il n'est pas pertinent de faire la même pour un **DynamicObject** car
-   il est implémenté seulement des des **set**.
+   dans notre programme les classes qui héritent de **DynamicObject** héritent
+   aussi de **Displayable**.
