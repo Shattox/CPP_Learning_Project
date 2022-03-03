@@ -1,8 +1,8 @@
-# Projet CPP
+# Steve Chen
 
 ## TASK_0
 
-### A-Execution
+### A - Execution
 
 - c -> ajoute un nouvel avion.
 - q ou x -> quitter le programme.
@@ -20,7 +20,7 @@ Lorsque l'on lance 4 avions, comme il n'y a que
 3 terminaux alors seulement 3 avions atteri et vont dans chacun des 3 terminaux.
 L'autre avion continue de voler et atteri une fois qu'il y a une place de disponible.
 
-### B- Analyse du code
+### B - Analyse du code
 
 - **AircraftType ->**
   Représente les caractéristiques d'un avion.
@@ -115,7 +115,7 @@ opérations n'invalident pas le déréférencement des autres éléments de la *
 De plus contrairement à un **std::vector** l'extension d'une **deque** est moins
 coûteuse que celle d'un **std::vector**.
 
-### C- Bidouillons !
+### C - Bidouillons !
 
 1. Les vitesses maximales et accélérations sont définis dans la classe **aircraft_types**.
 
@@ -142,10 +142,32 @@ coûteuse que celle d'un **std::vector**.
    dans notre programme les classes qui héritent de **DynamicObject** héritent
    aussi de **Displayable**.
 
-### D- Théorie
+### D - Théorie
 
 1. Seule la classe **Tower** peut réserver un terminal à l'aéroport car
    elle stocke l'état des terminaux en fonction de si il y a un avion ou non.
 
 2. On est pas passé par une référence car dans la fonction, on modifie la
    variable passé en paramètre.
+
+## TASK_1
+
+### Objectif 1 - Référencement des avions
+
+### B - Déterminer le propriétaire de chaque avion
+
+1. C'est la fonction **timer** qui est responsable de la destruction des avions du programme.
+
+
+2. La **display_queue** et la **move_queue** contiennent une référence sur un avion qui va être
+   détruit.
+
+
+3. on parcours le conteneur **move_queue** via un **iterateur**, dans ce parcours pour le
+   **display_queue** on apelle son destructeur et pour la **move_queue** on utilise la
+   fonction **erase** pour l'avion que l'on souhaite détruire.
+
+
+4. Il n'est pas judicieux d'appliquer la même chose pour **AircraftManager** car si non un avion
+   devra dépendre de **AircraftManager** ce qui n'est pas optimale.
+
