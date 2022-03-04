@@ -6,6 +6,7 @@
 #include "config.hpp"
 #include "img/image.hpp"
 #include "img/media_path.hpp"
+#include "aircraft_manager.hpp"
 
 #include <cassert>
 #include <cstdlib>
@@ -40,6 +41,7 @@ void TowerSimulation::create_aircraft(const AircraftType& type) const
     const Point3D direction = (-start).normalize();
 
     Aircraft* aircraft = new Aircraft { type, flight_number, start, direction, airport->get_tower() };
+    aircraft_manager->add(*aircraft);
 }
 
 void TowerSimulation::create_random_aircraft() const

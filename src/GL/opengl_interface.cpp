@@ -74,13 +74,8 @@ void display(void)
 void timer(const int step)
 {
     if (!pause) {
-        for (auto it = move_queue.begin(); it != move_queue.end(); it++)
-        {
-            if (!(*it)->move()) {
-                auto aircraft = (*it);
-                it = move_queue.erase(it);
-                delete (aircraft);
-            }
+        for (auto& item : move_queue) {
+            item->move();
         }
         glutPostRedisplay();
         glutTimerFunc(1000u / ticks_per_sec, timer, step + 1);
