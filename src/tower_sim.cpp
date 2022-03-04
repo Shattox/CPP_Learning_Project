@@ -41,7 +41,7 @@ void TowerSimulation::create_aircraft(const AircraftType& type) const
     const Point3D direction = (-start).normalize();
 
     Aircraft* aircraft = new Aircraft { type, flight_number, start, direction, airport->get_tower() };
-    aircraft_manager->add(*aircraft);
+    aircraft_manager->add(aircraft);
 }
 
 void TowerSimulation::create_random_aircraft() const
@@ -82,6 +82,12 @@ void TowerSimulation::init_airport()
     GL::move_queue.emplace(airport);
 }
 
+void TowerSimulation::init_aircraft_manager() {
+    aircraft_manager = new AircraftManager();
+
+    GL::move_queue.emplace(aircraft_manager);
+}
+
 void TowerSimulation::launch()
 {
     if (help)
@@ -91,6 +97,7 @@ void TowerSimulation::launch()
     }
 
     init_airport();
+    init_aircraft_manager();
     init_aircraft_types();
 
     GL::loop();

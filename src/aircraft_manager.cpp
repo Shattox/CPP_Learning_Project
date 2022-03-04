@@ -1,15 +1,15 @@
 #include "aircraft_manager.hpp"
 
 void AircraftManager::move() {
-    for (auto it = move_queue.begin(); it != move_queue.end(); it++) {
+    for (auto it = aircrafts.begin(); it != aircrafts.end(); ) {
         if (!(*it)->move()) {
-            auto aircraft = (*it);
-            it = move_queue.erase(it);
-            delete (aircraft);
+            it = aircrafts.erase(it);
+        } else {
+            it++;
         }
     }
 }
 
-void AircraftManager::add(const Aircraft& aircraft) {
-    aircrafts.emplace_back(aircraft);
+void AircraftManager::add(Aircraft* aircraft) {
+    aircrafts.emplace_back(std::unique_ptr<Aircraft>(aircraft));
 }

@@ -11,6 +11,5 @@ private:
 
 public:
     void move() override;
-    void add(const Aircraft& aircraft);
+    void add(Aircraft* aircraft);
 };
-
