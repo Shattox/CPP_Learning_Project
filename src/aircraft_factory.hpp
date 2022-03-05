@@ -4,11 +4,14 @@
 #include "aircraft_types.hpp"
 #include "airport.hpp"
 
+#include <unordered_set>
+
 class AircraftFactory {
 private:
     const std::string airlines[8] = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
     static constexpr size_t NUM_AIRCRAFT_TYPES = 3;
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
+    std::unordered_set<std::string> flight_numbers;
 
 public:
     AircraftFactory()
@@ -19,6 +22,6 @@ public:
             aircraft_types[2] = new AircraftType { .02f, .1f, .04f, MediaPath { "concorde_af.png" } };
         }
     }
-    Aircraft* create_aircraft(Airport* airport, const AircraftType& type) const;
+    Aircraft* create_aircraft(Airport* airport, const AircraftType& type);
     Aircraft* create_random_aircraft(Airport* airport);
 };
