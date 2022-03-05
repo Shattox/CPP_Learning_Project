@@ -171,3 +171,10 @@ coûteuse que celle d'un **std::vector**.
 4. Il n'est pas judicieux d'appliquer la même chose pour **AircraftManager** car si non un avion
    devra dépendre de **AircraftManager** ce qui n'est pas optimale.
 
+### Objectif 2 - Usine à avions
+
+### A - Création d'une factory
+
+Il faut initialiser **context_initializer** avant l'initialisation de la variable 
+**aircraft_factory** pour s'assurer que le constrcuteur de **context_initializer** soit
+appelé avant celui de **factory**.
