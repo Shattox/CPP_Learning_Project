@@ -1,13 +1,13 @@
 #include "aircraft_manager.hpp"
 
 void AircraftManager::move() {
-    for (auto it = aircrafts.begin(); it != aircrafts.end(); ) {
-        if (!(*it)->move()) {
-            it = aircrafts.erase(it);
-        } else {
-            it++;
-        }
-    }
+    aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
+                                   [](const auto& aircraft) {
+                                       if (!(aircraft)->move()) {
+                                            return true;
+                                       }
+                                       return false;
+                                   }), aircrafts.end());
 }
 
 void AircraftManager::add(Aircraft* aircraft) {
