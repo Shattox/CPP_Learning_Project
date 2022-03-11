@@ -5,7 +5,6 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <array>
 #include <numeric>
 
 struct Point2D
@@ -83,21 +82,21 @@ struct Point3D
     Point3D& operator+=(const Point3D& other)
     {
         std::transform(values.begin(), values.end(), other.values.begin(), values.begin(),
-            [](auto coord, auto other_coord) {return coord + other_coord; } );
+                       [](auto coord, auto other_coord) { return coord + other_coord; });
         return *this;
     }
 
     Point3D& operator-=(const Point3D& other)
     {
         std::transform(values.begin(), values.end(), other.values.begin(), values.begin(),
-            [](auto coord, auto other_coord) {return coord - other_coord; } );
+                       [](auto coord, auto other_coord) { return coord - other_coord; });
         return *this;
     }
 
     Point3D& operator*=(const float scalar)
     {
         std::transform(values.begin(), values.end(), values.begin(),
-            [scalar](auto coord) {return scalar * coord; });
+                       [scalar](auto coord) { return scalar * coord; });
         return *this;
     }
 
@@ -124,9 +123,10 @@ struct Point3D
 
     Point3D operator-() const { return Point3D { -x(), -y(), -z() }; }
 
-    float length() const {
-        return std::sqrt(std::reduce(values.begin(), values.end(),
-            0, [](auto acc, auto cur) { return acc + cur * cur; })); 
+    float length() const
+    {
+        return std::sqrt(std::reduce(values.begin(), values.end(), 0.f,
+                                     [](auto acc, auto cur) { return acc + cur * cur; }));
     }
 
     float distance_to(const Point3D& other) const { return (*this - other).length(); }

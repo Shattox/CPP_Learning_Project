@@ -2,10 +2,10 @@
 
 #include "GL/opengl_interface.hpp"
 #include "aircraft.hpp"
+#include "aircraft_manager.hpp"
 #include "airport.hpp"
 #include "config.hpp"
 #include "img/image.hpp"
-#include "aircraft_manager.hpp"
 
 #include <cassert>
 #include <cstdlib>
@@ -30,9 +30,9 @@ void TowerSimulation::create_aircraft() const
 {
     assert(airport); // make sure the airport is initialized before creating aircraft
 
-    auto aircraft = aircraft_factory->create_random_aircraft(airport);
+    auto aircraft = aircraft_factory->create_random_aircraft(*airport);
 
-    aircraft_manager->add(aircraft);
+    aircraft_manager->add(std::move(aircraft));
 }
 
 void TowerSimulation::create_keystrokes() const
@@ -45,9 +45,15 @@ void TowerSimulation::create_keystrokes() const
     GL::keystrokes.emplace('f', []() { GL::toggle_fullscreen(); });
     GL::keystrokes.emplace('m', []() { GL::ticks_per_sec++; });
     GL::keystrokes.emplace('l', []() { GL::ticks_per_sec--; });
-    GL::keystrokes.emplace('p', []() { GL::pause = !GL::pause; GL::timer(0); });
-    for (int i = 0; i < 8; i++) {
-        GL::keystrokes.emplace('0' + i, [this, i]() {aircraft_factory->count_airline_aircrafts(i); });
+    GL::keystrokes.emplace('p',
+                           []()
+                           {
+                               GL::pause = !GL::pause;
+                               GL::timer(0);
+                           });
+    for (int i = 0; i < 8; i++)
+    {
+        GL::keystrokes.emplace('0' + i, [this, i]() { aircraft_factory->count_airline_aircrafts(i); });
     }
 }
 
@@ -56,7 +62,7 @@ void TowerSimulation::display_help() const
     std::cout << "This is an airport tower simulator" << std::endl
               << "the following keysstrokes have meaning:" << std::endl;
 
-    for (const auto&  [key, value] : GL::keystrokes)
+    for (const auto& [key, value] : GL::keystrokes)
     {
         std::cout << key << ' ';
     }
@@ -71,7 +77,8 @@ void TowerSimulation::init_airport()
     GL::move_queue.emplace(airport);
 }
 
-void TowerSimulation::init_aircraft_manager() {
+void TowerSimulation::init_aircraft_manager()
+{
     aircraft_manager = new AircraftManager();
 
     GL::move_queue.emplace(aircraft_manager);

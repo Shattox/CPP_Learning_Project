@@ -1,15 +1,17 @@
 #pragma once
 
+#include "GL/dynamic_object.hpp"
+#include "aircraft.hpp"
+
 #include <memory>
 #include <vector>
-#include "aircraft.hpp"
-#include "GL/dynamic_object.hpp"
 
-class AircraftManager : public GL::DynamicObject {
+class AircraftManager : public GL::DynamicObject
+{
 private:
     std::vector<std::unique_ptr<Aircraft>> aircrafts;
 
 public:
     void move() override;
-    void add(Aircraft* aircraft);
+    void add(std::unique_ptr<Aircraft> aircraft);
 };
