@@ -92,7 +92,8 @@ bool Aircraft::move()
 {
     if (waypoints.empty())
     {
-        if (has_finished) {
+        if (has_finished)
+        {
             return false;
         }
         waypoints = control.get_instructions(*this);
@@ -103,7 +104,10 @@ bool Aircraft::move()
         turn_to_waypoint();
         // move in the direction of the current speed
         pos += speed;
-
+        if (--fuel == 0)
+        {
+            std::cout << "L'avion " << flight_number << " s'est crash !" << std::endl;
+        }
         // if we are close to our next waypoint, stike if off the list
         if (!waypoints.empty() && distance_to(waypoints.front()) < DISTANCE_THRESHOLD)
         {
