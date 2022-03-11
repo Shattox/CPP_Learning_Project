@@ -18,7 +18,15 @@ Aircraft* AircraftFactory::create_aircraft(Airport* airport, const AircraftType&
     return aircraft;
 }
 
-Aircraft* AircraftFactory::create_random_aircraft(Airport* airport)
-{
+Aircraft* AircraftFactory::create_random_aircraft(Airport* airport) {
     return create_aircraft(airport, *(aircraft_types[rand() % 3]));
+}
+
+void AircraftFactory::count_airline_aircrafts(int x) {
+    assert(x >= 0 && x < 8);
+
+    std::cout << airlines[x] << " : " << std::count_if(flight_numbers.begin(), flight_numbers.end(),
+        [this, x](std::string flight_number) 
+        {return airlines[x] == flight_number.substr(0, 2);})
+    << std::endl;
 }

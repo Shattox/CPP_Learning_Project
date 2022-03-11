@@ -24,4 +24,5 @@ public:
     }
     Aircraft* create_aircraft(Airport* airport, const AircraftType& type);
     Aircraft* create_random_aircraft(Airport* airport);
+    void count_airline_aircrafts(int x);
 };

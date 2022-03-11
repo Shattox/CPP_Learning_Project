@@ -46,6 +46,9 @@ void TowerSimulation::create_keystrokes() const
     GL::keystrokes.emplace('m', []() { GL::ticks_per_sec++; });
     GL::keystrokes.emplace('l', []() { GL::ticks_per_sec--; });
     GL::keystrokes.emplace('p', []() { GL::pause = !GL::pause; GL::timer(0); });
+    for (int i = 0; i < 8; i++) {
+        GL::keystrokes.emplace('0' + i, [this, i]() {aircraft_factory->count_airline_aircrafts(i); });
+    }
 }
 
 void TowerSimulation::display_help() const
