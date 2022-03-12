@@ -65,6 +65,7 @@ public:
 
     void display() const override;
     bool move();
+    bool has_terminal() const;
 
     friend class Tower;
 };
