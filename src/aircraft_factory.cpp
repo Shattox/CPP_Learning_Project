@@ -25,7 +25,7 @@ std::unique_ptr<Aircraft> AircraftFactory::create_random_aircraft(Airport& airpo
 
 void AircraftFactory::count_airline_aircrafts(int x) const
 {
-    assert(x >= 0 && x < 8);
+    assert(x >= 0 && x < (int) airlines.size());
 
     std::cout << airlines[x] << " : "
               << std::count_if(flight_numbers.begin(), flight_numbers.end(),

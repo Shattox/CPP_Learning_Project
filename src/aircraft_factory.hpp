@@ -9,7 +9,7 @@
 class AircraftFactory
 {
 private:
-    const std::string airlines[8]              = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
+    const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
     static constexpr size_t NUM_AIRCRAFT_TYPES = 3;
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
     std::unordered_set<std::string> flight_numbers;

@@ -104,10 +104,7 @@ bool Aircraft::move()
         turn_to_waypoint();
         // move in the direction of the current speed
         pos += speed;
-        if (--fuel == 0)
-        {
-            std::cout << "L'avion " << flight_number << " s'est crash !" << std::endl;
-        }
+
         // if we are close to our next waypoint, stike if off the list
         if (!waypoints.empty() && distance_to(waypoints.front()) < DISTANCE_THRESHOLD)
         {
@@ -132,6 +129,10 @@ bool Aircraft::move()
         }
         else
         {
+            if (--fuel == 0) {
+                std::cout << "Aircraft : " << flight_number << " will crash !" << std::endl;
+                return false;
+            }
             // if we are in the air, but too slow, then we will sink!
             const float speed_len = speed.length();
             if (speed_len < SPEED_THRESHOLD)
