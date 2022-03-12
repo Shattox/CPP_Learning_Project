@@ -157,3 +157,10 @@ bool Aircraft::has_terminal() const {
     }
     return false;
 }
+
+bool Aircraft::is_circling() const {
+    if (!waypoints.empty()) {
+        return waypoints.back().type == WaypointType::wp_air;
+    }
+    return false;
+}
