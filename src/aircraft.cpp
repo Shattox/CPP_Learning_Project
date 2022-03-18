@@ -129,9 +129,18 @@ bool Aircraft::move()
         }
         else
         {
-            if (--fuel == 0) {
+            if (--fuel == 0)
+            {
                 std::cout << "Aircraft : " << flight_number << " will crash !" << std::endl;
                 return false;
+            }
+            if (is_circling())
+            {
+                auto path = control.reserve_terminal(*this);
+                if (!path.empty())
+                {
+                    waypoints.swap(path);
+                }
             }
             // if we are in the air, but too slow, then we will sink!
             const float speed_len = speed.length();
@@ -151,15 +160,19 @@ void Aircraft::display() const
 {
     type.texture.draw(project_2D(pos), { PLANE_TEXTURE_DIM, PLANE_TEXTURE_DIM }, get_speed_octant());
 }
-bool Aircraft::has_terminal() const {
-    if (!waypoints.empty()) {
+bool Aircraft::has_terminal() const
+{
+    if (!waypoints.empty())
+    {
         return waypoints.back().type == WaypointType::wp_terminal;
     }
     return false;
 }
 
-bool Aircraft::is_circling() const {
-    if (!waypoints.empty()) {
+bool Aircraft::is_circling() const
+{
+    if (!waypoints.empty())
+    {
         return waypoints.back().type == WaypointType::wp_air;
     }
     return false;
