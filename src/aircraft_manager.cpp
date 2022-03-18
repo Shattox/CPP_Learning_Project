@@ -2,6 +2,11 @@
 
 void AircraftManager::move()
 {
+    std::sort(aircrafts.begin(), aircrafts.end(),
+              [](Aircraft& a, Aircraft& b) {
+
+              });
+
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
                                    [](const auto& aircraft) { return !(aircraft)->move(); }),
                     aircrafts.end());
