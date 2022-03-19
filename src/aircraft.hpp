@@ -55,7 +55,7 @@ public:
         pos { pos_ },
         speed { speed_ },
         control { control_ },
-        fuel { rand() % 3000  + 150}
+        fuel { rand() % 3000 + 150 }
     {
         speed.cap_length(max_speed());
     }
@@ -63,7 +63,7 @@ public:
     const std::string& get_flight_num() const { return flight_number; }
     float distance_to(const Point3D& p) const { return pos.distance_to(p); }
     int get_fuel() const { return fuel; }
-
+    bool get_is_at_terminal() const { return is_at_terminal; }
     void display() const override;
     bool move();
     bool has_terminal() const;
