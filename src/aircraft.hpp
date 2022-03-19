@@ -55,7 +55,7 @@ public:
         pos { pos_ },
         speed { speed_ },
         control { control_ },
-        fuel { 150 + rand() % 3000 }
+        fuel { rand() % 3000  + 150}
     {
         speed.cap_length(max_speed());
     }
@@ -68,6 +68,7 @@ public:
     bool move();
     bool has_terminal() const;
     bool is_circling() const;
+    bool is_low_on_fuel() const;
 
     friend class Tower;
 };

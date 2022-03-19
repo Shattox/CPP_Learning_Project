@@ -177,3 +177,7 @@ bool Aircraft::is_circling() const
     }
     return false;
 }
+
+bool Aircraft::is_low_on_fuel() const {
+    return fuel < 200;
+}
