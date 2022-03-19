@@ -22,7 +22,7 @@ private:
     bool is_at_terminal        = false;
     bool has_finished          = false;
     int fuel;
-
+    const int MAX_FUEL = 3000;
     // turn the aircraft to arrive at the next waypoint
     // try to facilitate reaching the waypoint after the next by facing the
     // right way to this end, we try to face the point Z on the line spanned by
@@ -55,7 +55,7 @@ public:
         pos { pos_ },
         speed { speed_ },
         control { control_ },
-        fuel { rand() % 3000 + 150 }
+        fuel { rand() % MAX_FUEL + 150 }
     {
         speed.cap_length(max_speed());
     }
@@ -69,6 +69,7 @@ public:
     bool has_terminal() const;
     bool is_circling() const;
     bool is_low_on_fuel() const;
+    void refill(int& fuel_stock);
 
     friend class Tower;
 };
