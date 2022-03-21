@@ -9,6 +9,7 @@
 #include "runway.hpp"
 #include "terminal.hpp"
 #include "tower.hpp"
+#include "aircraft_manager.hpp"
 
 #include <vector>
 
@@ -20,6 +21,10 @@ private:
     const GL::Texture2D texture;
     std::vector<Terminal> terminals;
     Tower tower;
+    int fuel_stock = 0;
+    int ordered_fuel = 0;
+    int next_refill_time = 0;
+    AircraftManager& aircraftManager;
 
     // reserve a terminal
     // if a terminal is free, return

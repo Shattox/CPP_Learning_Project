@@ -177,3 +177,16 @@ bool Aircraft::is_circling() const
     }
     return false;
 }
+
+bool Aircraft::is_low_on_fuel() const {
+    return fuel < 200;
+}
+
+void Aircraft::refill(int& fuel_stock)
+{
+    int fuel_needed = MAX_FUEL - fuel;
+    int fuel_to_fill = fuel_stock > fuel_needed ? fuel_stock : fuel_needed ;
+    fuel += fuel_to_fill;
+    fuel_stock -= fuel_to_fill;
+    std::cout << "Flight number " << flight_number << " filled with " << fuel_to_fill << std::endl;
+}

@@ -14,4 +14,5 @@ private:
 public:
     void move() override;
     void add(std::unique_ptr<Aircraft> aircraft);
+    int get_required_fuel();
 };

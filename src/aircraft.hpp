@@ -22,7 +22,7 @@ private:
     bool is_at_terminal        = false;
     bool has_finished          = false;
     int fuel;
-
+    const int MAX_FUEL = 3000;
     // turn the aircraft to arrive at the next waypoint
     // try to facilitate reaching the waypoint after the next by facing the
     // right way to this end, we try to face the point Z on the line spanned by
@@ -55,18 +55,21 @@ public:
         pos { pos_ },
         speed { speed_ },
         control { control_ },
-        fuel { 150 + rand() % 3000 }
+        fuel { rand() % MAX_FUEL + 150 }
     {
         speed.cap_length(max_speed());
     }
 
     const std::string& get_flight_num() const { return flight_number; }
     float distance_to(const Point3D& p) const { return pos.distance_to(p); }
-
+    int get_fuel() const { return fuel; }
+    bool get_is_at_terminal() const { return is_at_terminal; }
     void display() const override;
     bool move();
     bool has_terminal() const;
     bool is_circling() const;
+    bool is_low_on_fuel() const;
+    void refill(int& fuel_stock);
 
     friend class Tower;
 };
