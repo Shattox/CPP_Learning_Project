@@ -133,6 +133,7 @@ bool Aircraft::move()
             if (--fuel == 0.f)
             {
                 std::cout << "Aircraft : " << flight_number << " will crash !" << std::endl;
+                control.get_reserved_terminals().erase(this);
                 return false;
             }
             if (is_circling())

@@ -18,7 +18,9 @@ void AircraftManager::add(std::unique_ptr<Aircraft> aircraft)
 int AircraftManager::get_required_fuel()
 {
     int sum = 0;
+
     std::cout << aircrafts.size() << std::endl;
+
     for (const auto& aircraft : aircrafts)
     {
         std::cout << aircraft->get_flight_num() << std::endl;

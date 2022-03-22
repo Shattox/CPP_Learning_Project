@@ -93,8 +93,8 @@ void TowerSimulation::launch()
         return;
     }
 
-    init_airport();
     init_aircraft_manager();
+    init_airport();
 
     GL::loop();
 }
