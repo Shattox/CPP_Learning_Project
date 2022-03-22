@@ -20,7 +20,7 @@ int AircraftManager::get_required_fuel()
     int sum = 0;
     for (const auto& aircraft : aircrafts)
     {
-        if (aircraft->is_low_on_fuel() && aircraft->get_is_at_terminal())
+        if (aircraft->is_low_on_fuel() && !aircraft->get_has_finished())
         {
             sum += 3000 - aircraft->get_fuel();
         }

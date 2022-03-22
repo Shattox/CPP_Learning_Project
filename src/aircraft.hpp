@@ -70,6 +70,7 @@ public:
     bool is_circling() const;
     bool is_low_on_fuel() const;
     void refill(float& fuel_stock);
+    bool get_has_finished() { return has_finished; }
 
     friend class Tower;
 };
