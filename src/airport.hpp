@@ -25,7 +25,7 @@ private:
     float fuel_stock     = 0.f;
     int ordered_fuel     = 0;
     int next_refill_time = 0;
-    AircraftManager aircraft_manager;
+    AircraftManager& aircraft_manager;
 
     // reserve a terminal
     // if a terminal is free, return
@@ -57,14 +57,15 @@ private:
     Terminal& get_terminal(const size_t terminal_num) { return terminals.at(terminal_num); }
 
 public:
-    Airport(const AirportType& type_, const Point3D& pos_, const img::Image* image, const float z_ = 1.0f) :
+    Airport(const AirportType& type_, const Point3D& pos_, const img::Image* image,
+            AircraftManager& aircraft_manager_, const float z_ = 1.0f) :
         GL::Displayable { z_ },
         type { type_ },
         pos { pos_ },
         texture { image },
         terminals { type.create_terminals() },
         tower { *this },
-        aircraft_manager {}
+        aircraft_manager { aircraft_manager_ }
     {}
 
     ~Airport() {}
@@ -78,7 +79,9 @@ public:
         if (next_refill_time == 0)
         {
             auto received_fuel = ordered_fuel;
+            std::cout << "1" << std::endl;
             std::cout << aircraft_manager.get_required_fuel() << std::endl;
+            std::cout << "2" << std::endl;
             auto fill_ordered_fuel = std::min(aircraft_manager.get_required_fuel(), 5000);
             fuel_stock += received_fuel;
             ordered_fuel     = fill_ordered_fuel;
