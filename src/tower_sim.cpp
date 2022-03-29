@@ -55,6 +55,11 @@ void TowerSimulation::create_keystrokes() const
     {
         GL::keystrokes.emplace('0' + i, [this, i]() { aircraft_factory->count_airline_aircrafts(i); });
     }
+    GL::keystrokes.emplace('k',
+                           [this]() {
+                               std::cout << "Number of aircraft crashed : "
+                                         << aircraft_manager->get_aircraft_crashed() << std::endl;
+                           });
 }
 
 void TowerSimulation::display_help() const

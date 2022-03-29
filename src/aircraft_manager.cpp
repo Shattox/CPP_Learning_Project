@@ -6,7 +6,7 @@ void AircraftManager::move()
               [](std::unique_ptr<Aircraft>& a, std::unique_ptr<Aircraft>& b)
               { return a->has_terminal() < b->has_terminal() && a->get_fuel() < b->get_fuel(); });
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
-                                   [](const auto& aircraft)
+                                   [this](const auto& aircraft)
                                    {
                                        try
                                        {
@@ -14,6 +14,7 @@ void AircraftManager::move()
                                        } catch (AircraftCrash& err)
                                        {
                                            std::cerr << err.what() << std::endl;
+                                           incremente_aircraft_crash();
                                            return true;
                                        }
                                    }),
