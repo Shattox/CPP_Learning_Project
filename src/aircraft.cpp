@@ -125,7 +125,7 @@ bool Aircraft::move()
             if (!landing_gear_deployed)
             {
                 using namespace std::string_literals;
-                throw AircraftCrash { flight_number + " crashed into the ground"s };
+                throw AircraftCrash { flight_number + " crashed into the grounds" };
             }
         }
         else
