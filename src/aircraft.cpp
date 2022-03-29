@@ -133,7 +133,6 @@ bool Aircraft::move()
             if (--fuel == 0.f)
             {
                 std::cout << "Aircraft : " << flight_number << " will crash !" << std::endl;
-                control.get_reserved_terminals().erase(this);
                 return false;
             }
             if (is_circling())
@@ -173,23 +172,18 @@ bool Aircraft::has_terminal() const
 
 bool Aircraft::is_circling() const
 {
-    if (!waypoints.empty())
-    {
-        return waypoints.back().type == WaypointType::wp_air;
-    }
-    return false;
+    return !has_terminal() && !has_finished;
 }
 
 bool Aircraft::is_low_on_fuel() const
 {
-    return fuel < 200;
+    return fuel < 400;
 }
 
 void Aircraft::refill(float& fuel_stock)
 {
-    float fuel_needed = MAX_FUEL - fuel;
-    int fuel_to_fill  = std::min(fuel_needed, fuel_stock);
-    fuel += fuel_to_fill;
-    fuel_stock -= fuel_to_fill;
-    std::cout << "Flight number " << flight_number << " filled with " << fuel_to_fill << std::endl;
+    int quantity = std::min(fuel_stock, MAX_FUEL - fuel);
+    fuel_stock -= quantity;
+    fuel += quantity;
+    std::cout << "Flight number " << flight_number << " filled with " << quantity << std::endl;
 }

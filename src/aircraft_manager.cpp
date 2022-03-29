@@ -17,17 +17,10 @@ void AircraftManager::add(std::unique_ptr<Aircraft> aircraft)
 
 int AircraftManager::get_required_fuel()
 {
-    int sum = 0;
-
-    std::cout << aircrafts.size() << std::endl;
-
-    for (const auto& aircraft : aircrafts)
-    {
-        std::cout << aircraft->get_flight_num() << std::endl;
-        if (aircraft->is_low_on_fuel() && !aircraft->get_has_finished())
-        {
-            sum += 3000 - aircraft->get_fuel();
-        }
-    }
-    return sum;
+    return std::accumulate(aircrafts.begin(), aircrafts.end(), 0,
+                           [](int accu, std::unique_ptr<Aircraft>& ref) {
+                               return accu + ((ref->is_low_on_fuel() || ref->get_is_at_terminal())
+                                                  ? (3000 - ref->get_fuel())
+                                                  : 0);
+                           });
 }

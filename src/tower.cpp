@@ -68,14 +68,29 @@ void Tower::arrived_at_terminal(const Aircraft& aircraft)
 
 WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
 {
-    if (!aircraft.has_terminal() && aircraft.is_circling())
+    if (!aircraft.is_at_terminal)
     {
-        const auto vp = airport.reserve_terminal(aircraft);
-        if (!vp.first.empty())
+        // if the aircraft is far, then just guide it to the airport vicinity
+        if (aircraft.distance_to(airport.pos) < 5)
         {
-            reserved_terminals.emplace(&aircraft, vp.second);
+            // try and reserve a terminal for the craft to land
+            const auto vp = airport.reserve_terminal(aircraft);
+            if (!vp.first.empty())
+            {
+                reserved_terminals.emplace(&aircraft, vp.second);
+                return vp.first;
+            }
         }
-        return vp.first;
     }
+
     return {};
+}
+
+void Tower::delete_reservation(const Aircraft& aircraft)
+{
+    auto it = reserved_terminals.find(&aircraft);
+    if (it != reserved_terminals.end())
+    {
+        reserved_terminals.erase(it);
+    }
 }

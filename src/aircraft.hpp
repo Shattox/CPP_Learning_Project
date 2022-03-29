@@ -55,10 +55,12 @@ public:
         pos { pos_ },
         speed { speed_ },
         control { control_ },
-        fuel { rand() % 3000 + 150.f }
+        fuel { rand() % 2851 + 150.f }
     {
         speed.cap_length(max_speed());
     }
+
+    ~Aircraft() { control.delete_reservation(*this); }
 
     const std::string& get_flight_num() const { return flight_number; }
     float distance_to(const Point3D& p) const { return pos.distance_to(p); }
