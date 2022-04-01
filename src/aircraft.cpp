@@ -23,6 +23,7 @@ void Aircraft::turn_to_waypoint()
 
 void Aircraft::turn(Point3D direction)
 {
+    assert(&direction);
     (speed += direction.cap_length(type.max_accel)).cap_length(max_speed());
 }
 
@@ -79,6 +80,7 @@ void Aircraft::operate_landing_gear()
 
 void Aircraft::add_waypoint(const Waypoint& wp, const bool front)
 {
+    assert(&wp);
     if (front)
     {
         waypoints.push_front(wp);
