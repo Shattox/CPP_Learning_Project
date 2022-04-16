@@ -178,3 +178,31 @@ coûteuse que celle d'un **std::vector**.
 Il faut initialiser **context_initializer** avant l'initialisation de la variable 
 **aircraft_factory** pour s'assurer que le constrcuteur de **context_initializer** soit
 appelé avant celui de **factory**.
+
+### Objectif 4 - Templates
+
+### Objectif 1 - Devant ou derrière ?
+
+2. Pour que l'évaluation du flag se fasse à la compilation et non à l'éxecution,
+   il faut utiliser le ```if constexpr```. Pour cela il faut changer la fonction 
+   add_waypoint en une fonctions-template paramétré par un ```bool```.
+
+
+### Choix d'implémentation
+
+L'utilisation des containers appropriés tel que :
+un set pour stocker les numéros des vols qui doivent être unique.
+un vector pour stocker les avions afin de pouvoir utiliser les différentes
+fonctions liées au vector pour trié, itéré... plus facilement.
+Utiliser les fonctions déjà définis pour effectuer une action sur un container.
+
+### Situation bloqué, solution trouvée
+
+J'avais un problème lorsque j'ai du rajouter le aircraft_manager dans le constructeur
+de Aiport. J'ai résolu le problème en appellant dans la fonction 
+```void TowerSimulation::launch()``` ```init_aircraft_manager()``` avant ```init_airport```
+Bloqué sur la Task 4 Objectif 2.
+
+### Avis sur le projet
+
+Projet très guidé qui nous fait utiliser les notions vu dans les différents chapitre.
